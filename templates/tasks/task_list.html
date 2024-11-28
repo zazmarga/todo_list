@@ -25,21 +25,26 @@
           </a>
         {% endif %}
         </h5>
-          <p class="text-sm-left">
-           Created: {{ task.created_time }}
+        <p class="text small"></p>
+          <p class="text small">
+            Created: {{ task.created_time }}
+            {% if task.finish_time %}
+              / <sapn class="deadline">Deadline: {{ task.finish_time }}</sapn>
+            {% endif %}
           </p>
           <h5 class="text-secondary">
-          Tags:
-          {% for tag in task.tags.all %}
-            {{ tag.name }}
-          {% endfor %}
+            Tags:
+            {% for tag in task.tags.all %}
+              {{ tag.name }}
+            {% endfor %}
+          
+            <a href="{% url 'tasks:task-update' pk=task.id %}">
+               Update 
+            </a>
+            <a href="{% url 'tasks:task-delete' pk=task.id %}">
+               Delete
+            </a>
           </h5>
-        <a href="{% url 'tasks:task-update' pk=task.id %}">
-           Update 
-        </a>
-        <a href="{% url 'tasks:task-delete' pk=task.id %}">
-           Delete
-        </a>
       <hr>
     {% endfor %}
 
