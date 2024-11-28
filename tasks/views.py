@@ -1,5 +1,6 @@
-from django.shortcuts import redirect, render
-from django.urls import reverse_lazy, reverse
+from django.http import HttpRequest, HttpResponse
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
 from django.views import generic
 
 from tasks.forms import TaskCreationForm
@@ -58,7 +59,7 @@ class TaskDeleteView(generic.DeleteView):
     success_url = reverse_lazy("tasks:task-list")
 
 
-def task_is_done(request, pk):
+def task_is_done(request: HttpRequest, pk: int) -> HttpResponse:
     task = Task.objects.get(id=pk)
     task.done = not task.done
     task.save()

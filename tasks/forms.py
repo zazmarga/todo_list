@@ -37,6 +37,7 @@ class TaskCreationForm(forms.ModelForm):
             }
         ),
     )
+
     class Meta:
         model = Task
         fields = ["content", "finish_time", "tags"]
