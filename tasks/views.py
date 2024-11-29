@@ -59,8 +59,13 @@ class TaskDeleteView(generic.DeleteView):
     success_url = reverse_lazy("tasks:task-list")
 
 
-def task_is_done(request: HttpRequest, pk: int) -> HttpResponse:
-    task = Task.objects.get(id=pk)
-    task.done = not task.done
-    task.save()
-    return redirect("/")
+class TaskSwitchDoneView(generic.UpdateView):
+    model = Task
+    fields = []
+    template_name = "tasks/task_list.html"
+
+    def get(self, request, *args, **kwargs):
+        task = self.get_object()
+        task.done = not task.done
+        task.save()
+        return redirect("tasks:task-list")
