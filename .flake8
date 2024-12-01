@@ -1,0 +1,5 @@
+[flake8]
+ignore = Q000
+inline-quotes = "
+multiline-quotes = """
+docstring-quotes = """
